@@ -15,7 +15,7 @@ class Blog extends Component {
   componentDidMount() {
     // but trying to store them in a post constant won't work bcuz that get request happens asyncronously. it doesnt finish immedialy, it needs some time to go to the server and get the data.
     // axios uses promises
-    axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
+    axios.get("/posts").then((res) => {
       const posts = res.data.slice(0, 4);
       const updatedPosts = posts.map((post) => {
         return {
