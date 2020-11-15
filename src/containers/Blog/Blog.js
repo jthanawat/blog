@@ -9,6 +9,7 @@ class Blog extends Component {
   state = {
     posts: [],
     selectedPostId: null,
+    error:false,
   };
 
   componentDidMount() {
@@ -24,7 +25,10 @@ class Blog extends Component {
       });
       this.setState({ posts: updatedPosts });
       console.log(res);
-    });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
     // javascript doesn't wait for this to finish so if you're immediately calling this set state after get method, the data wont have been fetched yet.
     // this.setState({})
   }
