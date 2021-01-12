@@ -3,7 +3,9 @@ import React, { Component } from "react";
 
 import "./Blog.css";
 import Posts from "./Posts/Posts";
-import { Route } from "react-router-dom";
+import { Route, Link, NavLink, Switch } from "react-router-dom";
+import NewPost from "./NewPost/NewPost";
+import FullPost from "./FullPost/FullPost";
 class Blog extends Component {
   render() {
     return (
@@ -12,26 +14,42 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <NavLink
+                  to="/posts"
+                  exact
+                  activeClassName="my-active"
+                  activeStyle={{
+                    color: "#fa923f",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Posts
+                </NavLink>
               </li>
               <li>
-                <a href="/new-post">New Post</a>
+                <NavLink
+                  to={{
+                    // absolute path
+                    pathname: "/new-post",
+
+                    // relative path
+                    // pathname: this.props.match.url + "/new-post",
+                    hash: "#submit",
+                    search: "?quick-submit=true",
+                  }}
+                >
+                  New Post
+                </NavLink>
               </li>
             </ul>
           </nav>
         </header>
         {/* <Route path="/" exact render={()=> <h1>Home</h1>} />
         <Route path="/" render={()=> <h1>Home 2</h1>} /> */}
-        <Route path="/" exact component={Posts} />
-
-        {/* <Posts /> */}
-
-        {/* <section>
-          <FullPost id={this.state.selectedPostId} />
-        </section>
-        <section>
-          <NewPost />
-        </section> */}
+        <Switch>
+          <Route path="/new-post" component={NewPost} />
+          <Route path="/posts" component={Posts} />
+        </Switch>
       </div>
     );
   }
